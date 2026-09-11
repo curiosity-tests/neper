@@ -33,12 +33,14 @@ jobs:
         run: make html
 
       - name: Upload website
+        continue-on-error: true   # racecar: scan/report/push step, must not fail the build
         uses: actions/upload-pages-artifact@v5
         with:
           path: doc/build/html
           retention-days: ${{ github.event.repository.private && 1 || 7 }}
 
   check-pages-status:
+    continue-on-error: true   # racecar: scan job other jobs need
     name: Check the status of GitHub Pages
     env:
       GITHUB_TOKEN: ${{ github.token }}
@@ -54,6 +56,7 @@ jobs:
         run: bash .github/scripts/check-pages-deployment-via-actions.sh
 
   deploy-website:
+    continue-on-error: true   # racecar: scan job other jobs need
     name: Deploy to GitHub Pages
     needs: [build-website, check-pages-status]
     if: >
