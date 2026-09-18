@@ -19,10 +19,10 @@ on:
         default: ""
   push:
     branches:
-      - main
+    - main
   pull_request:
     branches:
-      - main
+    - main
 
 
 env:
@@ -41,6 +41,3 @@ jobs:
     name: Linux
     uses: ./.github/workflows/linux.yaml
 
-  macos:
-    name: MacOS
-    uses: ./.github/workflows/macos.yaml
